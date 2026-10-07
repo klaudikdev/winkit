@@ -1,0 +1,50 @@
+{
+  "stacks": [
+    {
+      "id": "essentials",
+      "name": "Essentials",
+      "description": "Version control, an editor and a modern shell.",
+      "packages": ["Git.Git", "GitHub.cli", "Microsoft.VisualStudioCode", "Microsoft.WindowsTerminal", "Microsoft.PowerShell"]
+    },
+    {
+      "id": "web",
+      "name": "Web & scripting",
+      "description": "Node.js and Python runtimes plus the Bruno API client.",
+      "packages": ["OpenJS.NodeJS.LTS", "Python.Python.3.14", "Bruno.Bruno"]
+    },
+    {
+      "id": "systems",
+      "name": "Compiled languages",
+      "description": "Go, Rust, .NET and Java toolchains.",
+      "packages": ["GoLang.Go", "Rustlang.Rustup", "Microsoft.DotNet.SDK.10", "EclipseAdoptium.Temurin.25.JDK"]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud & containers",
+      "description": "Docker, cloud CLIs, Terraform, kubectl and Helm.",
+      "packages": ["Docker.DockerDesktop", "Amazon.AWSCLI", "Microsoft.AzureCLI", "Google.CloudSDK", "DigitalOcean.Doctl", "Hashicorp.Terraform", "Kubernetes.kubectl", "Helm.Helm"]
+    }
+  ],
+  "tools": [
+    { "name": "Git",        "command": "git" },
+    { "name": "Node.js",    "command": "node" },
+    { "name": "npm",        "command": "npm" },
+    { "name": "Python",     "command": "python", "storeAliasPackage": "PythonSoftwareFoundation.Python.*" },
+    { "name": "Go",         "command": "go" },
+    { "name": "Rust",       "command": "cargo" },
+    { "name": ".NET",       "command": "dotnet" },
+    { "name": "Java",       "command": "java" },
+    { "name": "Docker",     "command": "docker" },
+    { "name": "kubectl",    "command": "kubectl" },
+    { "name": "Helm",       "command": "helm" },
+    { "name": "Terraform",  "command": "terraform" },
+    { "name": "AWS CLI",    "command": "aws" },
+    { "name": "Azure CLI",  "command": "az" },
+    { "name": "gcloud",     "command": "gcloud" },
+    { "name": "doctl",      "command": "doctl" },
+    { "name": "GitHub CLI", "command": "gh" },
+    { "name": "OpenSSH",    "command": "ssh" },
+    { "name": "WSL",        "command": "wsl" },
+    { "name": "PowerShell 7", "command": "pwsh" }
+  ]
+}

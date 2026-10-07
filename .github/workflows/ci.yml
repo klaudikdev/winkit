@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # The release workflow runs the same checks on the tagged commit.
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # Both hosted images are Windows Server, which also covers WinKit on servers.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2025]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Install Pester and PSScriptAnalyzer
+        shell: powershell
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module Pester -MinimumVersion 5.5.0 -MaximumVersion 5.99.99 -Scope CurrentUser -Force -SkipPublisherCheck
+          Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
+
+      - name: Lint
+        shell: powershell
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings .\PSScriptAnalyzerSettings.psd1
+          $results | Format-Table RuleName, Severity, ScriptName, Line, Message -AutoSize -Wrap
+          if ($results | Where-Object Severity -eq 'Error') { exit 1 }
+
+      - name: Unit, integration and safety tests
+        shell: powershell
+        run: .\tests\Run-Tests.ps1
+
+      - name: Administrator tests (throwaway service, task, registry keys)
+        shell: powershell
+        run: .\tools\Test-Elevated.ps1
+
+      - name: Apply and undo every tweak on the runner
+        shell: powershell
+        # Taskbar and File Explorer checks need a signed-in desktop and are
+        # skipped; every value is still read back through WMI and restored.
+        run: .\tools\Test-Effects.ps1 -Headless -OutFile effects.txt
+
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: effects-${{ matrix.os }}
+          path: effects.txt
+          if-no-files-found: ignore
+
+      - name: UI test (preview mode)
+        shell: powershell
+        # Hosted runners differ from desktops (no winget, virtual adapters),
+        # so this step reports but does not block.
+        continue-on-error: true
+        timeout-minutes: 10
+        run: powershell -STA -NoProfile -ExecutionPolicy Bypass -File .\tools\Test-UI.ps1
+
+      - name: Build
+        shell: powershell
+        run: .\build.ps1
+
+      - uses: actions/upload-artifact@v5
+        if: matrix.os == 'windows-2025'
+        with:
+          name: winkit-dist
+          path: dist/

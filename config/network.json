@@ -1,0 +1,55 @@
+{
+  "latencyTargets": [
+    { "provider": "AWS",          "region": "eu-central-1",   "location": "Frankfurt",     "host": "dynamodb.eu-central-1.amazonaws.com",   "port": 443 },
+    { "provider": "AWS",          "region": "eu-west-1",      "location": "Ireland",       "host": "dynamodb.eu-west-1.amazonaws.com",      "port": 443 },
+    { "provider": "AWS",          "region": "eu-west-2",      "location": "London",        "host": "dynamodb.eu-west-2.amazonaws.com",      "port": 443 },
+    { "provider": "AWS",          "region": "eu-south-1",     "location": "Milan",         "host": "dynamodb.eu-south-1.amazonaws.com",     "port": 443 },
+    { "provider": "AWS",          "region": "me-central-1",   "location": "UAE",           "host": "dynamodb.me-central-1.amazonaws.com",   "port": 443 },
+    { "provider": "AWS",          "region": "us-east-1",      "location": "N. Virginia",   "host": "dynamodb.us-east-1.amazonaws.com",      "port": 443 },
+    { "provider": "AWS",          "region": "us-west-2",      "location": "Oregon",        "host": "dynamodb.us-west-2.amazonaws.com",      "port": 443 },
+    { "provider": "AWS",          "region": "ap-southeast-1", "location": "Singapore",     "host": "dynamodb.ap-southeast-1.amazonaws.com", "port": 443 },
+    { "provider": "AWS",          "region": "ap-northeast-1", "location": "Tokyo",         "host": "dynamodb.ap-northeast-1.amazonaws.com", "port": 443 },
+
+    { "provider": "Hetzner",      "region": "fsn1",           "location": "Falkenstein",   "host": "fsn1-speed.hetzner.com",                "port": 443 },
+    { "provider": "Hetzner",      "region": "nbg1",           "location": "Nuremberg",     "host": "nbg1-speed.hetzner.com",                "port": 443 },
+    { "provider": "Hetzner",      "region": "hel1",           "location": "Helsinki",      "host": "hel1-speed.hetzner.com",                "port": 443 },
+    { "provider": "Hetzner",      "region": "ash",            "location": "Ashburn",       "host": "ash-speed.hetzner.com",                 "port": 443 },
+    { "provider": "Hetzner",      "region": "hil",            "location": "Hillsboro",     "host": "hil-speed.hetzner.com",                 "port": 443 },
+    { "provider": "Hetzner",      "region": "sin",            "location": "Singapore",     "host": "sin-speed.hetzner.com",                 "port": 443 },
+
+    { "provider": "DigitalOcean", "region": "fra1",           "location": "Frankfurt",     "host": "fra1.digitaloceanspaces.com",           "port": 443 },
+    { "provider": "DigitalOcean", "region": "ams3",           "location": "Amsterdam",     "host": "ams3.digitaloceanspaces.com",           "port": 443 },
+    { "provider": "DigitalOcean", "region": "lon1",           "location": "London",        "host": "lon1.digitaloceanspaces.com",           "port": 443 },
+    { "provider": "DigitalOcean", "region": "nyc3",           "location": "New York",      "host": "nyc3.digitaloceanspaces.com",           "port": 443 },
+    { "provider": "DigitalOcean", "region": "tor1",           "location": "Toronto",       "host": "tor1.digitaloceanspaces.com",           "port": 443 },
+    { "provider": "DigitalOcean", "region": "sfo3",           "location": "San Francisco", "host": "sfo3.digitaloceanspaces.com",           "port": 443 },
+    { "provider": "DigitalOcean", "region": "sgp1",           "location": "Singapore",     "host": "sgp1.digitaloceanspaces.com",           "port": 443 },
+    { "provider": "DigitalOcean", "region": "blr1",           "location": "Bangalore",     "host": "blr1.digitaloceanspaces.com",           "port": 443 },
+
+    { "provider": "Vultr",        "region": "fra",            "location": "Frankfurt",     "host": "fra-de-ping.vultr.com",                 "port": 443 },
+    { "provider": "Vultr",        "region": "ams",            "location": "Amsterdam",     "host": "ams-nl-ping.vultr.com",                 "port": 443 },
+    { "provider": "Vultr",        "region": "par",            "location": "Paris",         "host": "par-fr-ping.vultr.com",                 "port": 443 },
+    { "provider": "Vultr",        "region": "lon",            "location": "London",        "host": "lon-gb-ping.vultr.com",                 "port": 443 },
+    { "provider": "Vultr",        "region": "ewr",            "location": "New Jersey",    "host": "nj-us-ping.vultr.com",                  "port": 443 },
+    { "provider": "Vultr",        "region": "sgp",            "location": "Singapore",     "host": "sgp-ping.vultr.com",                    "port": 443 },
+
+    { "provider": "Linode",       "region": "eu-central",     "location": "Frankfurt",     "host": "speedtest.frankfurt.linode.com",        "port": 443 },
+    { "provider": "Linode",       "region": "eu-west",        "location": "London",        "host": "speedtest.london.linode.com",           "port": 443 },
+    { "provider": "Linode",       "region": "us-east",        "location": "Newark",        "host": "speedtest.newark.linode.com",           "port": 443 },
+    { "provider": "Linode",       "region": "ap-south",       "location": "Singapore",     "host": "speedtest.singapore.linode.com",        "port": 443 }
+  ],
+  "dnsProviders": [
+    { "id": "cloudflare", "name": "Cloudflare",   "description": "No filtering",          "ipv4": ["1.1.1.1", "1.0.0.1"],             "ipv6": ["2606:4700:4700::1111", "2606:4700:4700::1001"] },
+    { "id": "google",     "name": "Google",       "description": "No filtering",      "ipv4": ["8.8.8.8", "8.8.4.4"],             "ipv6": ["2001:4860:4860::8888", "2001:4860:4860::8844"] },
+    { "id": "quad9",      "name": "Quad9",        "description": "Blocks known malicious domains",        "ipv4": ["9.9.9.9", "149.112.112.112"],     "ipv6": ["2620:fe::fe", "2620:fe::9"] },
+    { "id": "adguard",    "name": "AdGuard",      "description": "Blocks ads and trackers at DNS level",  "ipv4": ["94.140.14.14", "94.140.15.15"],   "ipv6": ["2a10:50c0::ad1:ff", "2a10:50c0::ad2:ff"] },
+    { "id": "opendns",    "name": "OpenDNS",      "description": "Cisco resolver with phishing protection", "ipv4": ["208.67.222.222", "208.67.220.220"], "ipv6": ["2620:119:35::35", "2620:119:53::53"] }
+  ],
+  "dnsBenchmarkDomains": [
+    "github.com",
+    "microsoft.com",
+    "wikipedia.org",
+    "cloudflare.com",
+    "amazon.com"
+  ]
+}

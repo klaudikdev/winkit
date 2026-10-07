@@ -1,0 +1,90 @@
+{
+  "profiles": [
+    {
+      "id": "essentials",
+      "name": "Essentials",
+      "icon": "E735",
+      "description": "Low-risk fixes that suit almost every PC.",
+      "tweaks": [
+        "privacy.advertising-id",
+        "privacy.tailored-experiences",
+        "privacy.suggested-content",
+        "privacy.lock-screen-tips",
+        "privacy.web-search",
+        "performance.startup-delay",
+        "explorer.file-extensions",
+        "security.autoplay",
+        "security.remote-assistance"
+      ]
+    },
+    {
+      "id": "privacy",
+      "name": "Privacy",
+      "icon": "E72E",
+      "description": "Share less with Microsoft and advertisers.",
+      "tweaks": [
+        "privacy.advertising-id",
+        "privacy.tailored-experiences",
+        "privacy.suggested-content",
+        "privacy.lock-screen-tips",
+        "privacy.web-search",
+        "privacy.activity-history",
+        "privacy.diagnostic-data",
+        "privacy.telemetry-service",
+        "privacy.telemetry-tasks",
+        "privacy.inking-typing",
+        "privacy.online-speech",
+        "privacy.app-launch-tracking",
+        "privacy.recall",
+        "explorer.hide-recent"
+      ]
+    },
+    {
+      "id": "gaming",
+      "name": "Gaming",
+      "icon": "E7FC",
+      "description": "Fewer interruptions while you play and no background capture.",
+      "tweaks": [
+        "gaming.game-dvr",
+        "gaming.mouse-acceleration",
+        "gaming.sticky-keys",
+        "performance.high-performance-plan",
+        "performance.startup-delay",
+        "performance.background-apps",
+        "privacy.suggested-content"
+      ]
+    },
+    {
+      "id": "developer",
+      "name": "Developer",
+      "icon": "E943",
+      "description": "Developer Mode, long paths, visible extensions and hidden files, and the other settings developers change first.",
+      "tweaks": [
+        "developer.developer-mode",
+        "developer.long-paths",
+        "developer.end-task",
+        "developer.full-path-title",
+        "developer.ssh-agent",
+        "explorer.file-extensions",
+        "explorer.hidden-files",
+        "explorer.open-this-pc",
+        "explorer.classic-context-menu",
+        "privacy.web-search"
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Clean desktop",
+      "icon": "E7F4",
+      "description": "A quiet, distraction-free taskbar and Start menu.",
+      "tweaks": [
+        "explorer.hide-task-view",
+        "explorer.search-icon",
+        "explorer.classic-context-menu",
+        "privacy.suggested-content",
+        "privacy.lock-screen-tips",
+        "privacy.web-search"
+      ]
+    }
+  ]
+}

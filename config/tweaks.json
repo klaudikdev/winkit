@@ -1,0 +1,535 @@
+{
+  "categories": [
+    { "id": "privacy",     "name": "Privacy",     "icon": "E72E" },
+    { "id": "performance", "name": "Performance", "icon": "E945" },
+    { "id": "explorer",    "name": "Explorer & Taskbar", "icon": "E8B7" },
+    { "id": "gaming",      "name": "Gaming",      "icon": "E7FC" },
+    { "id": "developer",   "name": "Developer",   "icon": "E943" },
+    { "id": "security",    "name": "Security",    "icon": "EA18" }
+  ],
+  "tweaks": [
+    {
+      "id": "privacy.advertising-id",
+      "category": "privacy",
+      "title": "Disable advertising ID",
+      "description": "Stops apps from using a per-user advertising identifier to personalize ads across apps.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo", "name": "Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 }
+      ]
+    },
+    {
+      "id": "privacy.tailored-experiences",
+      "category": "privacy",
+      "title": "Disable tailored experiences",
+      "description": "Microsoft will no longer use your diagnostic data to show personalized tips, ads and offers. Shown as Personalized offers in newer versions of Settings.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Privacy", "name": "TailoredExperiencesWithDiagnosticDataEnabled", "kind": "DWord", "value": 0 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Privacy", "name": "PersonalizedOffersEnabled", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "privacy.suggested-content",
+      "category": "privacy",
+      "title": "Stop suggestions and sponsored app installs",
+      "description": "Stops Windows from silently installing sponsored apps and turns off Start and Settings suggestions, the welcome screen after updates and the 'finish setting up your device' screen. Sponsored apps that are already installed are not removed.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SilentInstalledAppsEnabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SystemPaneSuggestionsEnabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SoftLandingEnabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338388Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338389Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-353694Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-353696Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338393Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-310093Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\UserProfileEngagement", "name": "ScoobeSystemSettingEnabled", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "privacy.lock-screen-tips",
+      "category": "privacy",
+      "title": "Hide tips and fun facts on the lock screen",
+      "description": "Keeps the lock screen clean by removing Microsoft tips, tricks and promotional overlays. Windows Spotlight always shows its own captions, so this applies when the lock screen uses a picture or slideshow.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "RotatingLockScreenOverlayEnabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338387Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 }
+      ]
+    },
+    {
+      "id": "privacy.web-search",
+      "category": "privacy",
+      "title": "Remove web results from Start search",
+      "description": "Start and taskbar search stop showing Bing web results, so what you type is not sent to Bing. Set as a policy, which also hides recent searches in File Explorer.",
+      "risk": "low",
+      "restart": "signout",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer", "name": "DisableSearchBoxSuggestions", "kind": "DWord", "value": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "BingSearchEnabled", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "privacy.activity-history",
+      "category": "privacy",
+      "title": "Disable activity history",
+      "description": "Windows stops collecting the apps, files and pages you open and does not upload them to Microsoft.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "EnableActivityFeed", "kind": "DWord", "value": 0 },
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "PublishUserActivities", "kind": "DWord", "value": 0 },
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "UploadUserActivities", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "privacy.diagnostic-data",
+      "category": "privacy",
+      "title": "Send only required diagnostic data",
+      "description": "Sets the diagnostic data policy to the lowest level your Windows edition supports and hides feedback prompts. Settings shows this as managed by your organization. Do not use on Windows Insider PCs, which need optional diagnostic data.",
+      "risk": "medium",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "AllowTelemetry", "kind": "DWord", "value": 0 },
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "DoNotShowFeedbackNotifications", "kind": "DWord", "value": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Siuf\\Rules", "name": "NumberOfSIUFInPeriod", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "privacy.telemetry-service",
+      "category": "privacy",
+      "title": "Disable the telemetry services",
+      "description": "Turns off the Connected User Experiences and Telemetry service and the Device Management WAP Push message routing service. Do not use on PCs managed by Intune or another MDM, which need the WAP push service to sync.",
+      "risk": "medium",
+      "restart": "none",
+      "actions": [
+        { "type": "service", "name": "DiagTrack", "startup": "Disabled", "defaultStartup": "Automatic" },
+        { "type": "service", "name": "dmwappushservice", "startup": "Disabled", "defaultStartup": "Manual" }
+      ]
+    },
+    {
+      "id": "privacy.telemetry-tasks",
+      "category": "privacy",
+      "title": "Disable telemetry scheduled tasks",
+      "description": "Disables the compatibility appraiser, customer experience improvement and feedback tasks that collect usage data in the background. The appraiser also feeds Windows Update's upgrade compatibility checks, so on Windows 10 the Windows 11 upgrade offer can be delayed.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "task", "path": "\\Microsoft\\Windows\\Application Experience\\", "name": "Microsoft Compatibility Appraiser", "state": "Disabled", "defaultState": "Enabled" },
+        { "type": "task", "path": "\\Microsoft\\Windows\\Application Experience\\", "name": "Microsoft Compatibility Appraiser Exp", "state": "Disabled", "defaultState": "Enabled" },
+        { "type": "task", "path": "\\Microsoft\\Windows\\Application Experience\\", "name": "ProgramDataUpdater", "state": "Disabled", "defaultState": "Enabled" },
+        { "type": "task", "path": "\\Microsoft\\Windows\\Application Experience\\", "name": "MareBackup", "state": "Disabled", "defaultState": "Enabled" },
+        { "type": "task", "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\", "name": "Consolidator", "state": "Disabled", "defaultState": "Enabled" },
+        { "type": "task", "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\", "name": "UsbCeip", "state": "Disabled", "defaultState": "Enabled" },
+        { "type": "task", "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\", "name": "DmClient", "state": "Disabled", "defaultState": "Enabled" },
+        { "type": "task", "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\", "name": "DmClientOnScenarioDownload", "state": "Disabled", "defaultState": "Enabled" }
+      ]
+    },
+    {
+      "id": "privacy.inking-typing",
+      "category": "privacy",
+      "title": "Stop inking and typing personalization",
+      "description": "Windows stops building a personal dictionary from what you type and write, does not harvest your contacts for it and does not send typing data to Microsoft.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\InputPersonalization", "name": "RestrictImplicitInkCollection", "kind": "DWord", "value": 1, "defaultValue": 0 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\InputPersonalization", "name": "RestrictImplicitTextCollection", "kind": "DWord", "value": 1, "defaultValue": 0 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\InputPersonalization\\TrainedDataStore", "name": "HarvestContacts", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Personalization\\Settings", "name": "AcceptedPrivacyPolicy", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Input\\TIPC", "name": "Enabled", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "privacy.online-speech",
+      "category": "privacy",
+      "title": "Disable online speech recognition",
+      "description": "Voice input stays on your device. Voice typing (Win + H) stops working; device-based features such as Narrator keep working.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\OnlineSpeechPrivacy", "name": "HasAccepted", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "privacy.app-launch-tracking",
+      "category": "privacy",
+      "title": "Stop tracking app launches",
+      "description": "Windows no longer records which apps you open to rank Start and search results. The 'Most used' list will be empty.",
+      "risk": "low",
+      "restart": "explorer",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Start_TrackProgs", "kind": "DWord", "value": 0, "defaultValue": 1 }
+      ]
+    },
+    {
+      "id": "privacy.location",
+      "category": "privacy",
+      "title": "Turn off location access",
+      "description": "Turns off location for the whole device with the Windows policy for it. Maps, Weather, Find my device and automatic time zone will not know where you are, and Settings shows location as managed by your organization.",
+      "risk": "medium",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors", "name": "DisableLocation", "kind": "DWord", "value": 1 }
+      ]
+    },
+    {
+      "id": "privacy.recall",
+      "category": "privacy",
+      "title": "Disable Recall snapshots",
+      "description": "Prevents Windows from saving periodic snapshots of your screen, for every account on this PC. Recall only exists on Copilot+ PCs.",
+      "risk": "low",
+      "restart": "signout",
+      "windows": [11],
+      "minBuild": 26100,
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "DisableAIDataAnalysis", "kind": "DWord", "value": 1 },
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "DisableAIDataAnalysis", "kind": "DWord", "value": 1 }
+      ]
+    },
+    {
+      "id": "performance.high-performance-plan",
+      "category": "performance",
+      "title": "Use the High performance power plan",
+      "description": "Keeps the CPU ready at higher clock speeds. Best for desktops; on laptops it shortens battery life.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "powerplan", "scheme": "high", "defaultScheme": "balanced" }
+      ]
+    },
+    {
+      "id": "performance.startup-delay",
+      "category": "performance",
+      "title": "Remove the startup app delay",
+      "description": "Windows waits after sign-in, until the system is idle, before launching startup apps. This removes the wait. Takes effect from your next sign-in.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize", "name": "StartupDelayInMSec", "kind": "DWord", "value": 0 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize", "name": "WaitForIdleState", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "performance.menu-delay",
+      "category": "performance",
+      "title": "Open menus faster",
+      "description": "Shortens the hover delay before cascading menus open from 400 ms to 100 ms.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "spi", "setting": "menuDelay", "value": 100, "defaultValue": 400 }
+      ]
+    },
+    {
+      "id": "performance.reduce-animations",
+      "category": "performance",
+      "title": "Turn off window and taskbar animations",
+      "description": "Turns off minimize and maximize animations and Windows animation effects, so windows, menus and the taskbar respond without transitions. Apps that follow the setting, such as Settings, stop animating too.",
+      "risk": "low",
+      "restart": "explorer",
+      "actions": [
+        { "type": "spi", "setting": "minAnimate", "value": false, "defaultValue": true },
+        { "type": "spi", "setting": "clientAreaAnimation", "value": false, "defaultValue": true },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarAnimations", "kind": "DWord", "value": 0, "defaultValue": 1 }
+      ]
+    },
+    {
+      "id": "performance.background-apps",
+      "category": "performance",
+      "title": "Stop Store apps running in the background",
+      "description": "Store apps no longer run in the background. Apps that rely on background activity may deliver notifications late. Takes effect after you sign in again.",
+      "risk": "medium",
+      "restart": "signout",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications", "name": "GlobalUserDisabled", "kind": "DWord", "value": 1, "defaultValue": 0 }
+      ]
+    },
+    {
+      "id": "explorer.file-extensions",
+      "category": "explorer",
+      "title": "Show file name extensions",
+      "description": "Always shows extensions like .exe or .pdf, which makes disguised files easy to spot.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "shell", "flag": "showExtensions", "value": true, "defaultValue": false }
+      ]
+    },
+    {
+      "id": "explorer.hidden-files",
+      "category": "explorer",
+      "title": "Show hidden files and folders",
+      "description": "Files and folders marked as hidden appear in File Explorer. Protected system files stay hidden.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "shell", "flag": "showHidden", "value": true, "defaultValue": false }
+      ]
+    },
+    {
+      "id": "explorer.open-this-pc",
+      "category": "explorer",
+      "title": "Open File Explorer to This PC",
+      "description": "File Explorer starts on your drives instead of Home or Quick access.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "LaunchTo", "kind": "DWord", "value": 1 }
+      ]
+    },
+    {
+      "id": "explorer.hide-recent",
+      "category": "explorer",
+      "title": "Hide recent and frequent items",
+      "description": "Quick access and Home stop listing recently opened files and frequently used folders.",
+      "risk": "low",
+      "restart": "explorer",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer", "name": "ShowRecent", "kind": "DWord", "value": 0 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer", "name": "ShowFrequent", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "explorer.classic-context-menu",
+      "category": "explorer",
+      "title": "Use the full right-click menu",
+      "description": "Brings back the complete context menu so you do not have to click 'Show more options'.",
+      "risk": "low",
+      "restart": "explorer",
+      "windows": [11],
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32", "name": "", "kind": "String", "value": "", "ownedKey": "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" }
+      ]
+    },
+    {
+      "id": "explorer.taskbar-left",
+      "category": "explorer",
+      "title": "Align taskbar icons to the left",
+      "description": "Moves the Start button and taskbar icons to the left edge, like earlier versions of Windows.",
+      "risk": "low",
+      "restart": "none",
+      "windows": [11],
+      "notify": ["TraySettings"],
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarAl", "kind": "DWord", "value": 0, "defaultValue": 1 }
+      ]
+    },
+    {
+      "id": "explorer.hide-task-view",
+      "category": "explorer",
+      "title": "Hide the Task View button",
+      "description": "Removes the Task View button from the taskbar. Win + Tab still works.",
+      "risk": "low",
+      "restart": "none",
+      "notify": ["TraySettings"],
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowTaskViewButton", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "explorer.search-icon",
+      "category": "explorer",
+      "title": "Show search as an icon",
+      "description": "Replaces the wide taskbar search box with a compact icon.",
+      "risk": "low",
+      "restart": "none",
+      "notify": ["TraySettings"],
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "SearchboxTaskbarModeCache", "kind": "DWord", "value": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "SearchboxTaskbarMode", "kind": "DWord", "value": 1, "defaultValue": 2 }
+      ]
+    },
+    {
+      "id": "explorer.clock-seconds",
+      "category": "explorer",
+      "title": "Show seconds in the taskbar clock",
+      "description": "Adds seconds to the system clock. Uses a little more power on battery.",
+      "risk": "low",
+      "restart": "none",
+      "notify": ["TraySettings"],
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowSecondsInSystemClock", "kind": "DWord", "value": 1 }
+      ]
+    },
+    {
+      "id": "explorer.dark-mode",
+      "category": "explorer",
+      "title": "Use dark mode",
+      "description": "Switches Windows and apps that follow the system theme to dark mode.",
+      "risk": "low",
+      "restart": "none",
+      "notify": ["ImmersiveColorSet"],
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "name": "AppsUseLightTheme", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "name": "SystemUsesLightTheme", "kind": "DWord", "value": 0, "defaultValue": 1 }
+      ]
+    },
+    {
+      "id": "gaming.game-dvr",
+      "category": "gaming",
+      "title": "Disable Game Bar capture",
+      "description": "Turns off Xbox Game Bar recording and screenshots, including background recording, so capture never runs while you play.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\System\\GameConfigStore", "name": "GameDVR_Enabled", "kind": "DWord", "value": 0, "defaultValue": 1 },
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR", "name": "AppCaptureEnabled", "kind": "DWord", "value": 0 }
+      ]
+    },
+    {
+      "id": "gaming.mouse-acceleration",
+      "category": "gaming",
+      "title": "Disable mouse acceleration",
+      "description": "Turns off 'Enhance pointer precision' so the cursor moves exactly as far as your hand does.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "spi", "setting": "mouse", "value": [0, 0, 0], "defaultValue": [6, 10, 1] }
+      ]
+    },
+    {
+      "id": "gaming.sticky-keys",
+      "category": "gaming",
+      "title": "Disable the Sticky Keys shortcut",
+      "description": "Pressing Shift five times no longer opens the Sticky Keys prompt in the middle of a game.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "spi", "setting": "stickyKeysHotkey", "value": false, "defaultValue": true }
+      ]
+    },
+    {
+      "id": "gaming.gpu-scheduling",
+      "category": "gaming",
+      "title": "Enable hardware-accelerated GPU scheduling",
+      "description": "Moves GPU work scheduling from Windows to a dedicated scheduler on the graphics card, which can lower latency. Needs a supported GPU and a recent driver; already on by default on many newer PCs.",
+      "risk": "medium",
+      "restart": "reboot",
+      "actions": [
+        { "type": "registry", "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers", "name": "HwSchMode", "kind": "DWord", "value": 2 }
+      ]
+    },
+    {
+      "id": "developer.developer-mode",
+      "category": "developer",
+      "title": "Enable Developer Mode",
+      "description": "Lets you install apps from loose files, create symbolic links without elevation and use other developer features.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock", "name": "AllowDevelopmentWithoutDevLicense", "kind": "DWord", "value": 1, "defaultValue": 0 }
+      ]
+    },
+    {
+      "id": "developer.long-paths",
+      "category": "developer",
+      "title": "Enable long file paths",
+      "description": "Removes the 260-character path limit for apps that support it, such as PowerShell 7, Node.js and Python. Git also needs git config --global core.longpaths true. File Explorer keeps the old limit.",
+      "risk": "low",
+      "restart": "reboot",
+      "actions": [
+        { "type": "registry", "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem", "name": "LongPathsEnabled", "kind": "DWord", "value": 1, "defaultValue": 0 }
+      ]
+    },
+    {
+      "id": "developer.end-task",
+      "category": "developer",
+      "title": "Add 'End task' to the taskbar menu",
+      "description": "Right-click any taskbar app to force close it without opening Task Manager.",
+      "risk": "low",
+      "restart": "none",
+      "windows": [11],
+      "minBuild": 22631,
+      "notify": ["TraySettings"],
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings", "name": "TaskbarEndTask", "kind": "DWord", "value": 1 }
+      ]
+    },
+    {
+      "id": "developer.full-path-title",
+      "category": "developer",
+      "title": "Show the full path in File Explorer",
+      "description": "The File Explorer title and tabs show the complete folder path. Applies to windows you open from now on.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState", "name": "FullPath", "kind": "DWord", "value": 1, "defaultValue": 0 }
+      ]
+    },
+    {
+      "id": "developer.ssh-agent",
+      "category": "developer",
+      "title": "Start the OpenSSH agent automatically",
+      "description": "Runs the Windows OpenSSH agent so keys added with ssh-add are remembered, even across restarts. Git uses it only when configured to use Windows OpenSSH (core.sshCommand).",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "service", "name": "ssh-agent", "startup": "Automatic", "defaultStartup": "Disabled" }
+      ]
+    },
+    {
+      "id": "developer.wsl",
+      "category": "developer",
+      "title": "Enable Windows Subsystem for Linux",
+      "description": "Turns on the WSL and Virtual Machine Platform features. After restarting, install a distribution (for example with the Install Ubuntu button) to start using Linux. Virtual Machine Platform can slow down other hypervisors such as older VirtualBox versions.",
+      "risk": "low",
+      "restart": "reboot",
+      "actions": [
+        { "type": "feature", "name": "Microsoft-Windows-Subsystem-Linux", "state": "Enabled", "defaultState": "Disabled" },
+        { "type": "feature", "name": "VirtualMachinePlatform", "state": "Enabled", "defaultState": "Disabled" }
+      ]
+    },
+    {
+      "id": "developer.sandbox",
+      "category": "developer",
+      "title": "Enable Windows Sandbox",
+      "description": "A disposable desktop for testing untrusted software. Available on Pro, Enterprise and Education editions with virtualization turned on in the firmware.",
+      "risk": "low",
+      "restart": "reboot",
+      "actions": [
+        { "type": "feature", "name": "Containers-DisposableClientVM", "state": "Enabled", "defaultState": "Disabled" }
+      ]
+    },
+    {
+      "id": "developer.hyper-v",
+      "category": "developer",
+      "title": "Enable Hyper-V",
+      "description": "Microsoft's hypervisor for running full virtual machines. Available on Pro, Enterprise and Education editions. Older VirtualBox or VMware versions and some game anti-cheat software may stop working or run slower.",
+      "risk": "medium",
+      "restart": "reboot",
+      "actions": [
+        { "type": "feature", "name": "Microsoft-Hyper-V-All", "state": "Enabled", "defaultState": "Disabled" }
+      ]
+    },
+    {
+      "id": "security.autoplay",
+      "category": "security",
+      "title": "Disable AutoPlay",
+      "description": "Nothing runs or opens automatically when you connect a USB drive, memory card or phone.",
+      "risk": "low",
+      "restart": "none",
+      "actions": [
+        { "type": "registry", "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers", "name": "DisableAutoplay", "kind": "DWord", "value": 1, "defaultValue": 0 }
+      ]
+    },
+    {
+      "id": "security.remote-assistance",
+      "category": "security",
+      "title": "Disable Remote Assistance",
+      "description": "Nobody can be invited to view or control this PC through Remote Assistance. Remote Desktop is not affected.",
+      "risk": "low",
+      "restart": "none",
+      "server": false,
+      "actions": [
+        { "type": "registry", "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Remote Assistance", "name": "fAllowToGetHelp", "kind": "DWord", "value": 0, "defaultValue": 1 }
+      ]
+    }
+  ]
+}

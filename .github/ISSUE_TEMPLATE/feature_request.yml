@@ -1,0 +1,25 @@
+name: Suggest a tweak, app or feature
+description: Ideas that would make WinKit more useful
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What are you suggesting?
+      options:
+        - A new tweak
+        - A new app in the catalog
+        - A new feature
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: For a tweak, include the registry value, service or task it changes and how to undo it. For an app, include its exact winget id.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it useful?

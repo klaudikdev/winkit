@@ -1,0 +1,37 @@
+name: Bug report
+description: Something did not work as described
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. For security issues, use **Security > Report a vulnerability** instead.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: WinKit version
+      description: Shown under Settings & about.
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version and build
+      description: Run `winver`, or copy it from Settings & about.
+      placeholder: Windows 11 Pro 24H2, build 26100.2314
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Activity log
+      description: Open Activity at the bottom right, press Copy and paste it here. Logs are in %ProgramData%\Klaudik\WinKit\<your SID>\logs (Settings & about > Open data folder).
+      render: text

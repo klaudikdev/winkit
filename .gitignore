@@ -1,0 +1,8 @@
+dist/
+*.log
+Thumbs.db
+.vs/
+.vscode/*
+!.vscode/settings.json
+# Local output of tools/Test-Effects.ps1 runs
+.effects/

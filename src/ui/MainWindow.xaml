@@ -1,0 +1,1252 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Klaudik WinKit"
+        Width="1280" Height="820" MinWidth="1080" MinHeight="680"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI Variable Text, Segoe UI"
+        FontSize="13.5"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
+        Background="{DynamicResource BgBrush}"
+        Foreground="{DynamicResource TextBrush}">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="48" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="0" UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <!-- Palette (light). Dark values are swapped in at runtime. -->
+        <SolidColorBrush x:Key="BgBrush"          Color="#F5F6FA"/>
+        <SolidColorBrush x:Key="SidebarBrush"     Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="SurfaceBrush"     Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="HoverBrush"       Color="#F0F2F8"/>
+        <SolidColorBrush x:Key="LineBrush"        Color="#E3E7EF"/>
+        <SolidColorBrush x:Key="TrackBrush"       Color="#E9ECF4"/>
+        <SolidColorBrush x:Key="ScrollBrush"      Color="#C9CFDC"/>
+        <SolidColorBrush x:Key="TextBrush"        Color="#0F172A"/>
+        <SolidColorBrush x:Key="MutedBrush"       Color="#5B6B80"/>
+        <SolidColorBrush x:Key="AccentBrush"      Color="#1D3BD1"/>
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="#1631B4"/>
+        <SolidColorBrush x:Key="AccentSoftBrush"  Color="#ECEFFD"/>
+        <SolidColorBrush x:Key="AccentFillBrush"  Color="#1D3BD1"/>
+        <SolidColorBrush x:Key="OnAccentBrush"    Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="GoodBrush"        Color="#15803D"/>
+        <SolidColorBrush x:Key="GoodSoftBrush"    Color="#E7F6EC"/>
+        <SolidColorBrush x:Key="WarnBrush"        Color="#B45309"/>
+        <SolidColorBrush x:Key="WarnSoftBrush"    Color="#FDF3E3"/>
+        <SolidColorBrush x:Key="BadBrush"         Color="#C62828"/>
+        <SolidColorBrush x:Key="BadSoftBrush"     Color="#FDECEC"/>
+        <SolidColorBrush x:Key="InfoBrush"        Color="#0369A1"/>
+        <SolidColorBrush x:Key="InfoSoftBrush"    Color="#E5F2FA"/>
+        <SolidColorBrush x:Key="OverlayBrush"     Color="#800B1020"/>
+
+        <LinearGradientBrush x:Key="BrandGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1D3BD1" Offset="0"/>
+            <GradientStop Color="#4B2BD9" Offset="1"/>
+        </LinearGradientBrush>
+
+        <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+        <FontFamily x:Key="DisplayFont">Segoe UI Variable Display, Segoe UI</FontFamily>
+        <FontFamily x:Key="MonoFont">Cascadia Mono, Consolas</FontFamily>
+
+        <!-- Text -->
+        <Style x:Key="Icon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource IconFont}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="H1" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource DisplayFont}"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        </Style>
+        <Style x:Key="H2" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource DisplayFont}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        </Style>
+        <Style x:Key="Sub" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Caption" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="FontSize" Value="11.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- Containers -->
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="22"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+        <Style x:Key="ActionBar" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="BorderThickness" Value="0,1,0,0"/>
+            <Setter Property="Padding" Value="32,12,42,12"/>
+        </Style>
+
+        <!-- Buttons -->
+        <Style x:Key="Btn" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" RecognizesAccessKey="False"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Opacity" Value="0.82"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bd" Property="Opacity" Value="0.45"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="PrimaryBtn" TargetType="Button" BasedOn="{StaticResource Btn}">
+            <Setter Property="Background" Value="{DynamicResource AccentFillBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentFillBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentHoverBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DangerBtn" TargetType="Button" BasedOn="{StaticResource Btn}">
+            <Setter Property="Foreground" Value="{DynamicResource BadBrush}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource BadSoftBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="GhostBtn" TargetType="Button" BasedOn="{StaticResource Btn}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Padding" Value="8,5"/>
+        </Style>
+        <Style x:Key="ChromeBtn" TargetType="Button">
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource IconFont}" FontSize="10"
+                                       Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CloseBtn" TargetType="Button" BasedOn="{StaticResource ChromeBtn}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E81123"/>
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TileBtn" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1" CornerRadius="12" Padding="18,16">
+                            <ContentPresenter HorizontalAlignment="Stretch"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource AccentSoftBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Navigation -->
+        <Style x:Key="NavButton" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,1"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="GroupName" Value="Nav"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="bd" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="8" Padding="11,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="bar" Width="3" Height="16" CornerRadius="2" Background="{DynamicResource AccentBrush}"
+                                        HorizontalAlignment="Left" Margin="-12,0,0,0" Visibility="Hidden"/>
+                                <TextBlock Text="{TemplateBinding Tag}" FontFamily="{StaticResource IconFont}" FontSize="16"
+                                           VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}"/>
+                                <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource HoverBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource AccentSoftBrush}"/>
+                                <Setter TargetName="bar" Property="Visibility" Value="Visible"/>
+                                <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Chip" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1" CornerRadius="16" Padding="13,6">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource HoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource AccentSoftBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Selectable tile used for apps and profiles -->
+        <Style x:Key="SelectTile" TargetType="ToggleButton">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1" CornerRadius="10" Padding="14,12">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Stretch" Margin="0,0,26,0"/>
+                                <Border x:Name="tick" Width="18" Height="18" CornerRadius="9" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                        BorderBrush="{DynamicResource LineBrush}" BorderThickness="1.5" Background="Transparent">
+                                    <TextBlock x:Name="tickGlyph" Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="9" FontWeight="Bold"
+                                               Foreground="{DynamicResource OnAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource ScrollBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource AccentSoftBrush}"/>
+                                <Setter TargetName="tick" Property="Background" Value="{DynamicResource AccentFillBrush}"/>
+                                <Setter TargetName="tick" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="tickGlyph" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bd" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Check box -->
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="box" Width="18" Height="18" CornerRadius="5" BorderThickness="1.5"
+                                    BorderBrush="{DynamicResource ScrollBrush}" Background="{DynamicResource SurfaceBrush}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <TextBlock x:Name="glyph" Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="10" FontWeight="Bold"
+                                           Foreground="{DynamicResource OnAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                            </Border>
+                            <ContentPresenter Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="box" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="box" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="box" Property="BorderThickness" Value="2.5"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="box" Property="Background" Value="{DynamicResource AccentFillBrush}"/>
+                                <Setter TargetName="box" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="glyph" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.45"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Switch -->
+        <Style x:Key="Switch" TargetType="ToggleButton">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <StackPanel Orientation="Horizontal" Background="Transparent">
+                            <Border x:Name="track" Width="40" Height="22" CornerRadius="11" BorderThickness="1.5"
+                                    BorderBrush="{DynamicResource ScrollBrush}" Background="{DynamicResource SurfaceBrush}" VerticalAlignment="Center">
+                                <Ellipse x:Name="knob" Width="12" Height="12" Fill="{DynamicResource MutedBrush}" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                            </Border>
+                            <ContentPresenter Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="track" Property="Background" Value="{DynamicResource AccentFillBrush}"/>
+                                <Setter TargetName="track" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="knob" Property="Fill" Value="{DynamicResource OnAccentBrush}"/>
+                                <Setter TargetName="knob" Property="HorizontalAlignment" Value="Right"/>
+                                <Setter TargetName="knob" Property="Margin" Value="0,0,4,0"/>
+                                <Setter TargetName="knob" Property="Width" Value="14"/>
+                                <Setter TargetName="knob" Property="Height" Value="14"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="track" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="track" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="track" Property="BorderThickness" Value="2.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Plain toggle that looks like a ghost button (details / activity) -->
+        <Style x:Key="GhostToggle" TargetType="ToggleButton">
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="bd" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="6" Padding="7,3">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource HoverBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Text box with placeholder (Tag) -->
+        <Style x:Key="Input" TargetType="TextBox">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="SelectionBrush" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="8">
+                            <Grid>
+                                <TextBlock x:Name="ph" Text="{TemplateBinding Tag}" Foreground="{DynamicResource MutedBrush}" Margin="12,0,0,0"
+                                           VerticalAlignment="Center" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="ph" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource ScrollBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Scroll bars -->
+        <Style x:Key="ScrollThumb" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border CornerRadius="3" Background="{DynamicResource ScrollBrush}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="MinWidth" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="Transparent">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollThumb}" Margin="3,2"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Height" Value="10"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ScrollBar">
+                                <Grid Background="Transparent">
+                                    <Track x:Name="PART_Track" IsDirectionReversed="False">
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollThumb}" Margin="2,3"/>
+                                        </Track.Thumb>
+                                    </Track>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="Meter" TargetType="ProgressBar">
+            <Setter Property="Height" Value="6"/>
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource TrackBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Grid>
+                            <Border x:Name="PART_Track" CornerRadius="3" Background="{TemplateBinding Background}"/>
+                            <Border x:Name="PART_Indicator" CornerRadius="3" Background="{TemplateBinding Foreground}" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}" MaxWidth="420">
+                            <ContentPresenter TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Storyboard x:Key="BusyAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="BusyIndicatorShift" Storyboard.TargetProperty="X"
+                             From="-240" To="1400" Duration="0:0:1.4">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <DrawingImage x:Key="AppIcon">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#1D3BD1" Geometry="M16,0 A16,16 0 1 1 15.99,0 Z"/>
+                    <GeometryDrawing Geometry="M16,7 A9,9 0 1 1 7.5,19">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FFFFFF" Thickness="3" StartLineCap="Round" EndLineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFFF" Geometry="M16,13 A3,3 0 1 1 15.99,13 Z"/>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </Window.Resources>
+
+    <Window.Icon>
+        <StaticResource ResourceKey="AppIcon"/>
+    </Window.Icon>
+
+    <Border x:Name="RootBorder" Background="{DynamicResource BgBrush}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="244"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ============ Sidebar ============ -->
+            <Border x:Name="Sidebar" Background="{DynamicResource SidebarBrush}" BorderBrush="{DynamicResource LineBrush}" BorderThickness="0,0,1,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="72"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="22,6,0,0">
+                        <Image Source="{StaticResource AppIcon}" Width="30" Height="30"/>
+                        <StackPanel Margin="11,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="WinKit" FontFamily="{StaticResource DisplayFont}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource TextBrush}"/>
+                            <TextBlock Text="by Klaudik" FontSize="11.5" Foreground="{DynamicResource MutedBrush}" Margin="0,-2,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="14,10,14,0">
+                        <RadioButton x:Name="NavOverview"  Style="{StaticResource NavButton}" Tag="&#xE80F;" Content="Overview" IsChecked="True"/>
+                        <RadioButton x:Name="NavApps"      Style="{StaticResource NavButton}" Tag="&#xE71D;" Content="Apps"/>
+                        <RadioButton x:Name="NavDeveloper" Style="{StaticResource NavButton}" Tag="&#xE943;" Content="Developer"/>
+                        <RadioButton x:Name="NavTweaks"    Style="{StaticResource NavButton}" Tag="&#xE9E9;" Content="Tweaks"/>
+                        <RadioButton x:Name="NavNetwork"   Style="{StaticResource NavButton}" Tag="&#xE774;" Content="Network"/>
+                        <RadioButton x:Name="NavHistory"   Style="{StaticResource NavButton}" Tag="&#xE81C;" Content="History"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Margin="14,0,14,14">
+                        <RadioButton x:Name="NavSettings" Style="{StaticResource NavButton}" Tag="&#xE713;" Content="Settings &amp; about"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ============ Main ============ -->
+            <Grid x:Name="MainArea" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="34"/>
+                </Grid.RowDefinitions>
+
+                <!-- Title bar -->
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="32,0,0,0">
+                        <TextBlock x:Name="TitleText" Text="Overview" FontWeight="SemiBold" Foreground="{DynamicResource MutedBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <ToggleButton x:Name="PreviewToggle" Style="{StaticResource Switch}" WindowChrome.IsHitTestVisibleInChrome="True"
+                                      VerticalAlignment="Center" Margin="0,0,18,0"
+                                      ToolTip="Preview mode shows exactly what would change without changing anything.">
+                            <TextBlock Text="Preview mode" FontSize="12.5" Foreground="{DynamicResource TextBrush}"/>
+                        </ToggleButton>
+                        <Border x:Name="AdminBadge" CornerRadius="10" Padding="9,3" VerticalAlignment="Center" Margin="0,0,14,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="AdminBadgeIcon" Style="{StaticResource Icon}" FontSize="11" Text="&#xEA18;"/>
+                                <TextBlock x:Name="AdminBadgeText" FontSize="11.5" FontWeight="SemiBold" Margin="6,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        <Button x:Name="MinButton"   Style="{StaticResource ChromeBtn}" Content="&#xE921;" ToolTip="Minimize" AutomationProperties.Name="Minimize"/>
+                        <Button x:Name="MaxButton"   Style="{StaticResource ChromeBtn}" Content="&#xE922;" ToolTip="Maximize" AutomationProperties.Name="Maximize"/>
+                        <Button x:Name="CloseButton" Style="{StaticResource CloseBtn}"  Content="&#xE8BB;" ToolTip="Close" AutomationProperties.Name="Close"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Preview banner -->
+                <Border x:Name="PreviewBanner" Grid.Row="1" Visibility="Collapsed" Background="{DynamicResource WarnSoftBrush}"
+                        BorderBrush="{DynamicResource WarnBrush}" BorderThickness="0,0,0,1" Padding="32,8,42,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource Icon}" Text="&#xE7BA;" FontSize="14" Foreground="{DynamicResource WarnBrush}"/>
+                        <TextBlock Grid.Column="1" Margin="10,0,16,0" TextWrapping="Wrap" Foreground="{DynamicResource WarnBrush}" VerticalAlignment="Center">
+                            <Run Text="Preview mode is on." FontWeight="SemiBold"/>
+                            <Run Text="Nothing on this PC will change. Actions only list what they would do in Activity."/>
+                        </TextBlock>
+                        <Button x:Name="PreviewBannerOff" Grid.Column="2" Style="{StaticResource Btn}" Content="Turn off preview" Padding="12,4"/>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="2" x:Name="BusyBar" ClipToBounds="True" Visibility="Hidden">
+                    <Border Width="240" HorizontalAlignment="Left" CornerRadius="1" Background="{DynamicResource AccentBrush}">
+                        <Border.RenderTransform>
+                            <TranslateTransform x:Name="BusyIndicatorShift" X="-240"/>
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+
+                <!-- Pages -->
+                <Grid Grid.Row="3">
+
+                    <!-- ===== Overview ===== -->
+                    <ScrollViewer x:Name="PageOverview" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Margin="32,14,32,32" MaxWidth="1180">
+                            <TextBlock x:Name="OvGreeting" Style="{StaticResource H1}" Text="Welcome"/>
+                            <TextBlock x:Name="OvSubtitle" Style="{StaticResource Sub}" Margin="0,4,0,22"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="360"/>
+                                    <ColumnDefinition Width="16"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Style="{StaticResource Card}">
+                                    <StackPanel>
+                                        <TextBlock Text="SYSTEM HEALTH" Style="{StaticResource Caption}"/>
+                                        <Grid Width="168" Height="168" Margin="0,18,0,14">
+                                            <Ellipse Stroke="{DynamicResource TrackBrush}" StrokeThickness="12"/>
+                                            <Path x:Name="OvRing" Stroke="{DynamicResource AccentBrush}" StrokeThickness="12"
+                                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                <TextBlock x:Name="OvScore" Text="--" FontFamily="{StaticResource DisplayFont}" FontSize="44" FontWeight="Bold"
+                                                           HorizontalAlignment="Center" Foreground="{DynamicResource TextBrush}"/>
+                                                <TextBlock Text="out of 100" Style="{StaticResource Sub}" HorizontalAlignment="Center" Margin="0,-4,0,0"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <TextBlock x:Name="OvGrade" Text="Scanning your PC..." Style="{StaticResource H2}" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="OvCheckedAt" Style="{StaticResource Sub}" HorizontalAlignment="Center" Margin="0,2,0,18"/>
+                                        <UniformGrid Columns="2">
+                                            <Button x:Name="OvRescan" Style="{StaticResource Btn}" Margin="0,0,5,0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Style="{StaticResource Icon}" FontSize="13" Text="&#xE72C;"/>
+                                                    <TextBlock Text="Scan again" Margin="8,0,0,0"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button x:Name="OvExport" Style="{StaticResource Btn}" Margin="5,0,0,0" IsEnabled="False">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Style="{StaticResource Icon}" FontSize="13" Text="&#xE72D;"/>
+                                                    <TextBlock Text="Save report" Margin="8,0,0,0"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </UniformGrid>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="2" Style="{StaticResource Card}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="THIS PC" Style="{StaticResource Caption}"/>
+                                        <Grid Grid.Row="1" x:Name="OvInfoGrid" Margin="0,14,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="24"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel x:Name="OvInfoLeft"/>
+                                            <StackPanel x:Name="OvInfoRight" Grid.Column="2"/>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <Border Style="{StaticResource Card}" Margin="0,16,0,0" Padding="22,18,22,8">
+                                <StackPanel>
+                                    <TextBlock Text="WHAT WE CHECKED" Style="{StaticResource Caption}" Margin="0,0,0,6"/>
+                                    <StackPanel x:Name="OvChecks"/>
+                                </StackPanel>
+                            </Border>
+
+                            <TextBlock Text="Quick actions" Style="{StaticResource H2}" Margin="0,26,0,12"/>
+                            <UniformGrid Columns="3">
+                                <Button x:Name="OvQuickEssentials" Style="{StaticResource TileBtn}" Margin="0,0,8,0">
+                                    <StackPanel>
+                                        <Border Width="36" Height="36" CornerRadius="9" Background="{DynamicResource AccentSoftBrush}" HorizontalAlignment="Left">
+                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE735;" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Start with the Essentials profile" FontWeight="SemiBold" Margin="0,12,0,2"/>
+                                        <TextBlock Text="Low-risk privacy and comfort fixes. Each one can be undone." Style="{StaticResource Sub}" FontSize="12.5"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="OvQuickDeveloper" Style="{StaticResource TileBtn}" Margin="4,0,4,0">
+                                    <StackPanel>
+                                        <Border Width="36" Height="36" CornerRadius="9" Background="{DynamicResource GoodSoftBrush}" HorizontalAlignment="Left">
+                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE943;" Foreground="{DynamicResource GoodBrush}" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Set up your dev tools" FontWeight="SemiBold" Margin="0,12,0,2"/>
+                                        <TextBlock Text="Git, editors, runtimes and cloud CLIs, installed together." Style="{StaticResource Sub}" FontSize="12.5"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="OvQuickLatency" Style="{StaticResource TileBtn}" Margin="8,0,0,0">
+                                    <StackPanel>
+                                        <Border Width="36" Height="36" CornerRadius="9" Background="{DynamicResource InfoSoftBrush}" HorizontalAlignment="Left">
+                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE753;" Foreground="{DynamicResource InfoBrush}" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Find your closest cloud region" FontWeight="SemiBold" Margin="0,12,0,2"/>
+                                        <TextBlock Text="Measure latency to AWS, Hetzner, DigitalOcean and more." Style="{StaticResource Sub}" FontSize="12.5"/>
+                                    </StackPanel>
+                                </Button>
+                            </UniformGrid>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- ===== Apps ===== -->
+                    <Grid x:Name="PageApps" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ScrollViewer x:Name="AppsScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel Margin="32,14,32,24" MaxWidth="1180">
+                                <Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="Apps" Style="{StaticResource H1}"/>
+                                        <TextBlock Text="Install, update and remove apps with winget, using only its official community repository."
+                                                   Style="{StaticResource Sub}" Margin="0,4,0,0" MaxWidth="620" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <Button x:Name="AppsRefresh" Style="{StaticResource Btn}" Margin="0,0,8,0" ToolTip="Check which apps are installed">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource Icon}" FontSize="13" Text="&#xE72C;"/>
+                                                <TextBlock Text="Refresh" Margin="8,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button x:Name="AppsUpdateAll" Style="{StaticResource Btn}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource Icon}" FontSize="13" Text="&#xE777;"/>
+                                                <TextBlock Text="Update all apps" Margin="8,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Border x:Name="AppsNotice" Visibility="Collapsed" CornerRadius="10" Padding="16,12" Margin="0,18,0,0"
+                                        Background="{DynamicResource WarnSoftBrush}">
+                                    <TextBlock x:Name="AppsNoticeText" TextWrapping="Wrap" Foreground="{DynamicResource WarnBrush}"/>
+                                </Border>
+
+                                <StackPanel Margin="0,20,0,6">
+                                    <TextBox x:Name="AppsSearch" Style="{StaticResource Input}" Tag="Search apps" Width="360" HorizontalAlignment="Left"/>
+                                    <WrapPanel x:Name="AppsFilters" Margin="0,12,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel x:Name="AppsList"/>
+                                <TextBlock x:Name="AppsEmpty" Text="No apps match your search." Style="{StaticResource Sub}" Margin="0,30,0,0"
+                                           HorizontalAlignment="Center" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Border Grid.Row="1" Style="{StaticResource ActionBar}">
+                            <Grid MaxWidth="1180">
+                                <TextBlock x:Name="AppsSelCount" VerticalAlignment="Center" Foreground="{DynamicResource MutedBrush}" Text="Select apps to install or remove"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button x:Name="AppsImport" Style="{StaticResource GhostBtn}" Content="Import list" Margin="0,0,4,0"/>
+                                    <Button x:Name="AppsExport" Style="{StaticResource GhostBtn}" Content="Export list" Margin="0,0,4,0"/>
+                                    <Button x:Name="AppsClear" Style="{StaticResource GhostBtn}" Content="Clear" Margin="0,0,12,0"/>
+                                    <Button x:Name="AppsUninstall" Style="{StaticResource DangerBtn}" Content="Uninstall" Margin="0,0,8,0"/>
+                                    <Button x:Name="AppsInstall" Style="{StaticResource PrimaryBtn}" Content="Install selected"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- ===== Developer ===== -->
+                    <ScrollViewer x:Name="PageDeveloper" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Margin="32,14,32,32" MaxWidth="1180">
+                            <TextBlock Text="Developer" Style="{StaticResource H1}"/>
+                            <TextBlock Text="Install toolchains, set up Git and SSH, and enable WSL."
+                                       Style="{StaticResource Sub}" Margin="0,4,0,22"/>
+
+                            <Border Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <Grid>
+                                        <StackPanel>
+                                            <TextBlock Text="Your toolchain" Style="{StaticResource H2}"/>
+                                            <TextBlock Text="Tools found on your PATH right now." Style="{StaticResource Sub}" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <Button x:Name="DevToolsRefresh" Style="{StaticResource GhostBtn}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource Icon}" FontSize="12" Text="&#xE72C;"/>
+                                                <TextBlock Text="Refresh" Margin="6,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                    <WrapPanel x:Name="DevTools" Margin="0,16,0,0"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                                <StackPanel>
+                                    <Grid>
+                                        <StackPanel>
+                                            <TextBlock Text="Install a stack" Style="{StaticResource H2}"/>
+                                            <TextBlock Text="Pick what you need. Everything installs silently from winget, one after another."
+                                                       Style="{StaticResource Sub}" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <Button x:Name="DevInstall" Style="{StaticResource PrimaryBtn}" Content="Install selected" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                    </Grid>
+                                    <UniformGrid x:Name="DevStacks" Columns="4" Margin="0,18,0,0"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Grid Margin="0,16,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="16"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Style="{StaticResource Card}">
+                                    <StackPanel>
+                                        <TextBlock Text="Git identity" Style="{StaticResource H2}"/>
+                                        <TextBlock x:Name="DevGitStatus" Text="Used for every commit you make on this PC." Style="{StaticResource Sub}" Margin="0,2,0,14"/>
+                                        <TextBox x:Name="DevGitName" Style="{StaticResource Input}" Tag="Full name"/>
+                                        <TextBox x:Name="DevGitEmail" Style="{StaticResource Input}" Tag="Email address" Margin="0,8,0,0"/>
+                                        <TextBox x:Name="DevGitBranch" Style="{StaticResource Input}" Tag="Default branch (main)" Margin="0,8,0,0"/>
+                                        <Button x:Name="DevGitSave" Style="{StaticResource Btn}" Content="Save to global Git config" HorizontalAlignment="Left" Margin="0,14,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="2" Style="{StaticResource Card}">
+                                    <StackPanel>
+                                        <TextBlock Text="SSH key" Style="{StaticResource H2}"/>
+                                        <TextBlock x:Name="DevSshStatus" Style="{StaticResource Sub}" Margin="0,2,0,14"/>
+                                        <Border CornerRadius="8" Background="{DynamicResource HoverBrush}" Padding="12,10">
+                                            <TextBlock x:Name="DevSshKey" FontFamily="{StaticResource MonoFont}" FontSize="11.5" TextWrapping="Wrap"
+                                                       Foreground="{DynamicResource MutedBrush}" Text="No key yet"/>
+                                        </Border>
+                                        <WrapPanel Margin="0,14,0,0">
+                                            <Button x:Name="DevSshGenerate" Style="{StaticResource Btn}" Content="Generate Ed25519 key" Margin="0,0,8,8"/>
+                                            <Button x:Name="DevSshCopy" Style="{StaticResource Btn}" Content="Copy public key" Margin="0,0,8,8"/>
+                                            <Button x:Name="DevSshFolder" Style="{StaticResource GhostBtn}" Content="Open .ssh folder" Margin="0,0,0,8"/>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="44" Height="44" CornerRadius="10" Background="{DynamicResource AccentSoftBrush}" VerticalAlignment="Top">
+                                        <TextBlock Style="{StaticResource Icon}" Text="&#xE756;" FontSize="20" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                                    </Border>
+                                    <StackPanel Grid.Column="1" Margin="16,0,16,0">
+                                        <TextBlock Text="Windows Subsystem for Linux" Style="{StaticResource H2}"/>
+                                        <TextBlock x:Name="DevWslStatus" Style="{StaticResource Sub}" Margin="0,2,0,0" Text="Checking..."/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Button x:Name="DevWslEnable" Style="{StaticResource Btn}" Content="Enable WSL" Margin="0,0,8,0"/>
+                                        <Button x:Name="DevWslInstall" Style="{StaticResource PrimaryBtn}" Content="Install Ubuntu"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <Border Style="{StaticResource Card}" Margin="0,16,0,0" Padding="22,18,22,10">
+                                <StackPanel>
+                                    <TextBlock Text="Developer settings" Style="{StaticResource H2}"/>
+                                    <TextBlock Text="Each one can be undone with one click." Style="{StaticResource Sub}" Margin="0,2,0,8"/>
+                                    <StackPanel x:Name="DevTweaks"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- ===== Tweaks ===== -->
+                    <Grid x:Name="PageTweaks" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel Margin="32,14,32,24" MaxWidth="1180">
+                                <Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="Tweaks" Style="{StaticResource H1}"/>
+                                        <TextBlock Text="Every change is recorded with the value it replaced, so you can undo it at any time from here or from History."
+                                                   Style="{StaticResource Sub}" Margin="0,4,0,0" MaxWidth="640" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <Button x:Name="TwRefresh" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource Icon}" FontSize="13" Text="&#xE72C;"/>
+                                            <TextBlock Text="Refresh" Margin="8,0,0,0"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                                <TextBlock Text="START FROM A PROFILE" Style="{StaticResource Caption}" Margin="0,24,0,10"/>
+                                <UniformGrid x:Name="TwProfiles" Columns="5" Margin="-5,0,-5,0"/>
+
+                                <WrapPanel x:Name="TwFilters" Margin="0,22,0,6"/>
+                                <StackPanel x:Name="TwList"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Border Grid.Row="1" Style="{StaticResource ActionBar}">
+                            <Grid MaxWidth="1180">
+                                <TextBlock x:Name="TwSelCount" VerticalAlignment="Center" Foreground="{DynamicResource MutedBrush}"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button x:Name="TwClear" Style="{StaticResource GhostBtn}" Content="Clear" Margin="0,0,12,0"/>
+                                    <Button x:Name="TwUndo" Style="{StaticResource Btn}" Content="Undo selected" Margin="0,0,8,0"/>
+                                    <Button x:Name="TwApply" Style="{StaticResource PrimaryBtn}" Content="Apply selected"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- ===== Network ===== -->
+                    <ScrollViewer x:Name="PageNetwork" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Margin="32,14,32,32" MaxWidth="1180">
+                            <TextBlock Text="Network" Style="{StaticResource H1}"/>
+                            <TextBlock Text="Find the cloud region closest to you and pick the fastest DNS resolver for your connection."
+                                       Style="{StaticResource Sub}" Margin="0,4,0,22"/>
+
+                            <Border Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <Grid>
+                                        <StackPanel Margin="0,0,180,0">
+                                            <TextBlock Text="Cloud region latency" Style="{StaticResource H2}"/>
+                                            <TextBlock Text="Measures the TCP handshake time from this PC to data centers of major cloud providers. Lower is better for anything you deploy there."
+                                                       Style="{StaticResource Sub}" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <Button x:Name="NetLatencyRun" Style="{StaticResource PrimaryBtn}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource Icon}" FontSize="13" Text="&#xE768;"/>
+                                                <TextBlock Text="Run test" Margin="8,0,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                    <Border x:Name="NetBest" Visibility="Collapsed" CornerRadius="10" Padding="16,12" Margin="0,18,0,0" Background="{DynamicResource AccentSoftBrush}">
+                                        <Grid>
+                                            <StackPanel>
+                                                <TextBlock x:Name="NetBestText" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}"/>
+                                                <TextBlock Text="Klaudik can deploy your app to this provider and keep a standby copy in a second region."
+                                                           Style="{StaticResource Sub}" FontSize="12.5" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                            <Button x:Name="NetBestPromo" Style="{StaticResource GhostBtn}" Content="Learn more" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <Grid x:Name="NetLatencyGrid" Margin="0,14,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="28"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel x:Name="NetLatencyLeft"/>
+                                        <StackPanel x:Name="NetLatencyRight" Grid.Column="2"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                                <StackPanel>
+                                    <Grid>
+                                        <StackPanel Margin="0,0,300,0">
+                                            <TextBlock Text="DNS" Style="{StaticResource H2}"/>
+                                            <TextBlock Text="Your resolver answers every lookup before a page or API call can start. Benchmark them, then switch with one click. Any switch can be undone from History."
+                                                       Style="{StaticResource Sub}" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                            <Button x:Name="NetDnsFlush" Style="{StaticResource Btn}" Content="Flush cache" Margin="0,0,8,0"/>
+                                            <Button x:Name="NetDnsBench" Style="{StaticResource PrimaryBtn}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Style="{StaticResource Icon}" FontSize="13" Text="&#xE9D9;"/>
+                                                    <TextBlock Text="Benchmark" Margin="8,0,0,0"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel x:Name="NetDnsCurrent" Margin="0,16,0,0"/>
+                                    <TextBlock Text="SWITCH ALL CONNECTED ADAPTERS TO" Style="{StaticResource Caption}" Margin="0,16,0,10"/>
+                                    <WrapPanel x:Name="NetDnsProviders"/>
+                                    <StackPanel x:Name="NetDnsBenchList" Margin="0,8,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- ===== History ===== -->
+                    <ScrollViewer x:Name="PageHistory" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Margin="32,14,32,32" MaxWidth="1180">
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="History" Style="{StaticResource H1}"/>
+                                    <TextBlock Text="Everything WinKit changed on this PC, newest first. Undo restores the exact values that were there before."
+                                               Style="{StaticResource Sub}" Margin="0,4,0,0" MaxWidth="600" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <Button x:Name="HiLogs" Style="{StaticResource GhostBtn}" Content="Open logs" Margin="0,0,8,0"/>
+                                    <Button x:Name="HiSystemRestore" Style="{StaticResource Btn}" Content="System Restore" Margin="0,0,8,0"/>
+                                    <Button x:Name="HiRestorePoint" Style="{StaticResource PrimaryBtn}" Content="Create restore point"/>
+                                </StackPanel>
+                            </Grid>
+                            <Border x:Name="HiEmpty" Style="{StaticResource Card}" Margin="0,22,0,0" Padding="22,40">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Style="{StaticResource Icon}" Text="&#xE81C;" FontSize="30" Foreground="{DynamicResource MutedBrush}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="No changes yet" Style="{StaticResource H2}" HorizontalAlignment="Center" Margin="0,12,0,4"/>
+                                    <TextBlock Text="Tweaks and DNS switches you make will appear here." Style="{StaticResource Sub}" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <StackPanel x:Name="HiList" Margin="0,22,0,0"/>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- ===== Settings ===== -->
+                    <ScrollViewer x:Name="PageSettings" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Margin="32,14,32,32" MaxWidth="900" HorizontalAlignment="Left">
+                            <TextBlock Text="Settings &amp; about" Style="{StaticResource H1}" Margin="0,0,0,22"/>
+
+                            <Border Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <TextBlock Text="Appearance" Style="{StaticResource H2}"/>
+                                    <WrapPanel Margin="0,14,0,0">
+                                        <RadioButton x:Name="SetThemeSystem" Style="{StaticResource Chip}" GroupName="Theme" Content="Match Windows"/>
+                                        <RadioButton x:Name="SetThemeLight"  Style="{StaticResource Chip}" GroupName="Theme" Content="Light"/>
+                                        <RadioButton x:Name="SetThemeDark"   Style="{StaticResource Chip}" GroupName="Theme" Content="Dark"/>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="Safety" Style="{StaticResource H2}"/>
+                                    <ToggleButton x:Name="SetRestorePoint" Style="{StaticResource Switch}" Margin="0,16,0,0" HorizontalAlignment="Left">
+                                        <TextBlock Text="Create a System Restore point before the first tweak of each session"/>
+                                    </ToggleButton>
+                                    <TextBlock Style="{StaticResource Sub}" Margin="50,4,0,0" FontSize="12.5"
+                                               Text="Recommended. Restore points let Windows roll back the whole system, independent of WinKit's own undo."/>
+                                    <TextBlock Style="{StaticResource Sub}" Margin="0,16,0,0" FontSize="12.5"
+                                               Text="Preview mode (top right) runs every action as a dry run and writes what would change to the activity log."/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{StaticResource AppIcon}" Width="44" Height="44"/>
+                                        <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                                            <TextBlock Text="Klaudik WinKit" Style="{StaticResource H2}"/>
+                                            <TextBlock x:Name="SetVersion" Style="{StaticResource Sub}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Style="{StaticResource Sub}" Margin="0,16,0,0"
+                                               Text="Free and open source under the MIT license, provided as is, without warranty: you use WinKit at your own risk. WinKit collects no telemetry, has no accounts and only connects to the internet for winget (including the installed-apps check on the Apps and Developer pages), the latency and DNS tests, the update check you start here, and Microsoft's servers when you install Ubuntu with wsl --install."/>
+                                    <WrapPanel Margin="0,16,0,0">
+                                        <Button x:Name="SetCheckUpdate" Style="{StaticResource Btn}" Content="Check for updates" Margin="0,0,8,8"/>
+                                        <Button x:Name="SetGithub" Style="{StaticResource Btn}" Content="Source code" Margin="0,0,8,8"/>
+                                        <Button x:Name="SetIssues" Style="{StaticResource GhostBtn}" Content="Report a problem" Margin="0,0,8,8"/>
+                                        <Button x:Name="SetDataFolder" Style="{StaticResource GhostBtn}" Content="Open data folder" Margin="0,0,8,8"/>
+                                    </WrapPanel>
+                                    <TextBlock x:Name="SetUpdateStatus" Style="{StaticResource Sub}" FontSize="12.5" Visibility="Collapsed"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Margin="0,16,0,0" CornerRadius="12" Background="{StaticResource BrandGradient}" Padding="26,22">
+                                <Grid>
+                                    <StackPanel Margin="0,0,170,0">
+                                        <TextBlock Text="Built by Klaudik" Foreground="White" FontFamily="{StaticResource DisplayFont}" FontSize="18" FontWeight="SemiBold"/>
+                                        <TextBlock Foreground="#DDE3FF" TextWrapping="Wrap" Margin="0,6,0,0"
+                                                   Text="Klaudik is a cloud platform for developers. It deploys your apps, scales them with traffic and keeps a synchronized standby copy in a second data center. WinKit is one of the tools we use ourselves and share for free."/>
+                                    </StackPanel>
+                                    <Button x:Name="SetWebsite" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand" AutomationProperties.Name="Visit klaudik.com">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="bd" Background="#FFFFFF" CornerRadius="8" Padding="16,9">
+                                                    <TextBlock Text="Visit klaudik.com" Foreground="#1D3BD1" FontWeight="SemiBold"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="bd" Property="Background" Value="#E8ECFF"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <!-- Activity drawer -->
+                <Border x:Name="ActivityPanel" Grid.Row="4" Height="190" Visibility="Collapsed"
+                        Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource LineBrush}" BorderThickness="0,1,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="20,8,12,0">
+                            <TextBlock Text="ACTIVITY" Style="{StaticResource Caption}" VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="ActivityCopy" Style="{StaticResource GhostBtn}" Content="Copy" FontSize="12"/>
+                                <Button x:Name="ActivityClear" Style="{StaticResource GhostBtn}" Content="Clear" FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
+                        <TextBox x:Name="ActivityLog" Grid.Row="1" IsReadOnly="True" BorderThickness="0" Background="Transparent"
+                                 Foreground="{DynamicResource TextBrush}" FontFamily="{StaticResource MonoFont}" FontSize="12"
+                                 Padding="16,4,16,8" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" TextWrapping="Wrap"/>
+                    </Grid>
+                </Border>
+
+                <!-- Status bar -->
+                <Border Grid.Row="5" Background="{DynamicResource SidebarBrush}" BorderBrush="{DynamicResource LineBrush}" BorderThickness="0,1,0,0">
+                    <Grid Margin="20,0,12,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse x:Name="StatusDot" Width="8" Height="8" Fill="{DynamicResource GoodBrush}"/>
+                            <TextBlock x:Name="StatusText" Text="Ready" Margin="9,0,0,0" FontSize="12.5" Foreground="{DynamicResource MutedBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <ToggleButton x:Name="ActivityToggle" Style="{StaticResource GhostToggle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource Icon}" FontSize="12" Text="&#xE8FD;"/>
+                                    <TextBlock Text="Activity" Margin="6,0,0,0" FontSize="12.5"/>
+                                </StackPanel>
+                            </ToggleButton>
+                            <TextBlock x:Name="StatusVersion" FontSize="12" Foreground="{DynamicResource MutedBrush}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Toast -->
+            <Border x:Name="Toast" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,24,96" IsHitTestVisible="False"
+                    CornerRadius="10" Padding="16,11" Background="{DynamicResource TextBrush}" Visibility="Collapsed" MaxWidth="420">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="24" ShadowDepth="4" Opacity="0.25" Color="#000000"/>
+                </Border.Effect>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="ToastIcon" Style="{StaticResource Icon}" FontSize="14" Text="&#xE73E;" Foreground="{DynamicResource BgBrush}"/>
+                    <TextBlock x:Name="ToastText" Margin="10,0,0,0" TextWrapping="Wrap" MaxWidth="360" Foreground="{DynamicResource BgBrush}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Dialog -->
+            <Grid x:Name="DialogLayer" Grid.ColumnSpan="2" Visibility="Collapsed">
+                <Border Background="{DynamicResource OverlayBrush}"/>
+                <Border Style="{StaticResource Card}" Width="480" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="26,24">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="40" ShadowDepth="8" Opacity="0.3" Color="#000000"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock x:Name="DlgTitle" Style="{StaticResource H2}" FontSize="18" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="DlgMessage" TextWrapping="Wrap" Margin="0,10,0,0" Foreground="{DynamicResource MutedBrush}" LineHeight="20"/>
+                        <StackPanel x:Name="DlgButtons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,24,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

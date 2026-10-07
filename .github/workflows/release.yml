@@ -1,0 +1,72 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+jobs:
+  # Runs the full CI suite (lint, tests on Windows Server 2022 and 2025,
+  # administrator tests, apply-and-undo of every tweak) on the tagged commit.
+  test:
+    uses: ./.github/workflows/ci.yml
+
+  build:
+    needs: test
+    runs-on: windows-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Check that VERSION matches the tag
+        shell: powershell
+        run: |
+          $version = (Get-Content VERSION -Raw).Trim()
+          if ("v$version" -ne $env:GITHUB_REF_NAME) { throw "VERSION is $version but the tag is $env:GITHUB_REF_NAME" }
+
+      - name: Build
+        shell: powershell
+        run: .\build.ps1 -Repository $env:GITHUB_REPOSITORY
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: release
+          path: dist/
+          if-no-files-found: error
+
+  # The only job with write access. It runs no repository code.
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: release
+          path: dist
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          hash=$(cut -d' ' -f1 dist/WinKit.ps1.sha256)
+          printf 'Start WinKit from PowerShell:\n\n```powershell\nirm https://klaudik.com/win | iex\n```\n\nSHA-256 of `WinKit.ps1`: `%s`\n\nSee [CHANGELOG.md](https://github.com/%s/blob/%s/CHANGELOG.md) for what changed.\n' \
+            "$hash" "$GITHUB_REPOSITORY" "$GITHUB_REF_NAME" > notes.md
+          gh release create "$GITHUB_REF_NAME" dist/WinKit.ps1 dist/WinKit.ps1.sha256 dist/win.ps1 \
+            --repo "$GITHUB_REPOSITORY" --title "WinKit ${GITHUB_REF_NAME#v}" --notes-file notes.md
+
+      - name: Check the published file against the pinned launcher
+        run: |
+          url="https://github.com/$GITHUB_REPOSITORY/releases/download/$GITHUB_REF_NAME/WinKit.ps1"
+          curl -fsSL "$url" -o published.ps1
+          actual=$(sha256sum published.ps1 | cut -d' ' -f1 | tr 'a-f' 'A-F')
+          grep -q "$actual" dist/win.ps1 || { echo "The launcher does not pin the published file ($actual)"; exit 1; }
+          echo "Launcher pins $actual"
